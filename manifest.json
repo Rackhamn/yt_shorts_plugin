@@ -1,0 +1,25 @@
+{
+	"name": "Youtube Shorts as Video",
+	"description": "Allows you to watch Youtube Shorts as regular Youtube videos!",
+	"version": "1.0",
+	"manifest_version": 2,
+	"permissions": [
+		"webRequest",
+		"webRequestBlocking",
+		"declarativeNetRequest",
+		"host_permissions",
+		"*://*.youtube.com/*"
+	],
+	"declarative_net_request": {
+		"rule_resources": [
+			{
+			"id": "ruleset",
+			"enabled": true,
+			"path": "redir_rules.json"
+			}
+		]
+	},
+	"background": {
+		"service_worker": "redir.js"
+	}
+}

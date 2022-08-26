@@ -1,0 +1,16 @@
+[
+	{
+		"id": 1,
+		"priority": 1,
+		"action": {
+			"type": "redirect",
+			"redirect": {
+				"regexSubstitution": "watch?v="
+			}
+		},
+		"condition": {
+			"regexFilter": "shorts\/",
+			"resourceTypes": ["main_frame"]
+		}
+	}
+]
