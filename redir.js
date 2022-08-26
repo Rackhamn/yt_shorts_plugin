@@ -1,3 +1,5 @@
+
+// this one does the work
 chrome.webRequest.onBeforeRequest.addListener(
 	function(details) {
 		let nurl = details.url.replace("shorts/", "watch?v=");
@@ -14,8 +16,21 @@ chrome.webRequest.onBeforeRequest.addListener(
 		// modifying the current request does not work on my chrome browser.
 		// instead we cancel the current request. (and above we set the new 'redir')
 		// return { redirectUrl : nurl };
-		return { cancel: true };
 	}, 
-	{urls: ["*://www.youtube.com/shorts/*"]},
-	["blocking"]
+	{urls: ["*://www.youtube.com/shorts/*"]}
 	);
+	
+const filter = {
+  url: [
+    {
+      urlMatches: 'https://www.youtube.com/shorts/*',
+    },
+  ],
+};
+
+// this makes it so that the script does not get inactive forever
+// and it also runs on preloaded pages
+chrome.webNavigation.onCompleted.addListener((details)=>{
+	let nurl = details.url.replace("shorts/", "watch?v=");
+	chrome.tabs.update(details.tabID, {url:nurl});
+}, filter);
